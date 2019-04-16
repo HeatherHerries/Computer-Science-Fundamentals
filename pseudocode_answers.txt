@@ -57,13 +57,16 @@ End if
 implement it in any computer language of your choice.
 
 A:
-function findName(name){
-	var phonebook = ['Heather', 'Kourtney', 'Madeline'];
-	for (var i = 0; i < phonebook.length; i++){
-	if (phonebook[i] === entry) {
-		return "We found:" + " " + name;
-	  } else {
-		return "No name found";
-	   }
-	findEntry('Heather');
+function findName(name) {
+  var phonebook = ['Heather', 'Kourtney', 'Madeline'];
+  for (var i = 0; i < phonebook.length; i++) {
+    if (phonebook[i] === name) {
+      return "We found:" + " " + (name);
+    } else {
+      return "No name found";
+    }
+  }
+}
+
+findName('Heather');
 
