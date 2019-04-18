@@ -41,17 +41,15 @@ and more descriptive. Second, the code could use better naming,
 which could make the code more descriptive and no need for
 comments. Here is an example of how the code could be cleaner...
 
-Function convertTemperature (x, y)
-   IF y = "F" THEN
-   SET z to (x-32) * (5/9)
-   degrees fahrenheit to celsius
-   PRINT z
+Function convertTemperature (degrees, scale)
+   IF scale = "F" THEN
+   SET temperature to (degrees-32) * (5/9)
+   PRINT temperature
 
-   ELSE IF y = "C" THEN
-   SET z to x * 1.8000 + 32.00
-   degrees celsius to fahrenheit
+   ELSE IF scales = "C" THEN
+   SET temperature to degrees * 1.8000 + 32.00
 
-   PRINT z
+   PRINT temperature
 
    END IF
 
@@ -93,15 +91,17 @@ END FUNCTION
 
 Refactor:
 
-FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
-   //We don't need the total amount at the beginning
-   IF paymentType = 'CASH' THEN 
-       PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax) // amount paid by cash
-   ELSE IF paymentType = 'CREDIT CARD' THEN
-       CALL getPayment RETURNING amount
-       PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax) //amount paid by credit card
-   END IF
-END FUNCTION
+FUNCTION getAmount(subtotal, discountRate)
+    RETURN subtotal * discountRate + (subtotal * tax)
+
+FUNCTION checkOutCustomer(amountPaid, amount, paymentType)
+    PRINT "Your total due is: " + amount
+    IF paymentType = 'CASH' THEN
+        PRINT "Change due: " + amountPaid - amount
+    ELSE IF paymentType = 'CREDIT CARD' THEN
+        PRINT "Your credit card has been charged: " + amountPaid
+    END IF 
+END FUNCTION               
 
 b. The following function checks out a book if there are no 
 issues with the guest's account.
@@ -204,15 +204,18 @@ Example:
 The square root of 2 is approximately 1.414213562373095.
 
 function square(arr) {
-	let sum = 0;
+   let sum = 0;
+
    for (var i = 0; i < arr.length; i++){
 	sum += arr[i];
-      }
+   }
+
    if (sum > 0 && Math.sqrt(sum) % 1 === 0){
 	return Math.sqrt(sum);
    } else {
 	return sum;
-      }
+   }
+)
   square([1,2,3,4,5,6,7]);
 
   7. Duplicate Given an array of integers, find out whether 
@@ -221,11 +224,22 @@ function square(arr) {
   the array, and false if every element is distinct.
 
   function duplicate(arr) {
-    for (i = 0; i < arr.length; i++){
-	for (j = i +1; j < arr.length; j++){
-	  if ( [i] = [j]){
-		return true;
-		} else {
-		return false;
-		}
-     duplicate([1,2,3,4,5]);
+      var counts = {};
+      arr.forEach(function(n) {
+          counts[n] = counts[n] || 0;
+          counts [n]++;
+      });
+
+      for (var key in counts) {
+          if (counts[key] >= 2) {
+              return true;
+          }
+      }
+      return false;
+  }
+
+  console.log(duplicate([1, 2, 3, 4, 5, 6, 7])); //prints false
+  console.log(duplicate([1, 2, 3, 4, 5, 6, 7, 1])); //prints true
+  console.log(duplicate([1, 1, 1, 4, 5, 6, 7, 1])); //prints true
+              
+
