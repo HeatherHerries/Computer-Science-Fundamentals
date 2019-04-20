@@ -84,22 +84,23 @@ FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
        CALL getPayment RETURNING amount
        PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
    ELSE IF paymentType = 'CREDIT CARD' THEN
-       CALL getPayment RETURNING amount
-       PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
-   END IF
-END FUNCTION
+
 
 Refactor:
 
-FUNCTION getAmount(subtotal, discountRate)
-    RETURN subtotal * discountRate + (subtotal * tax)
+BEGIN
+FUNCTION totalDue(subtotal, discountRate)
+PRINT "Your total due is: " + subtotal * discountRate + (subtotal * tax)
+END
 
-FUNCTION checkOutCustomer(amountPaid, amount, paymentType)
-    PRINT "Your total due is: " + amount
+FUNCTION checkOutCustomer(totalDue, paymentType)
     IF paymentType = 'CASH' THEN
-        PRINT "Change due: " + amountPaid - amount
+        CALL getPayment RETURNING amount
+        PRINT "Change due: " + amountPaid - totalDue()
+
     ELSE IF paymentType = 'CREDIT CARD' THEN
-        PRINT "Your credit card has been charged: " + amountPaid
+        CALL getPayment RETURNING amount
+        PRINT "Your credit card has been charged: " + totalDue
     END IF 
 END FUNCTION               
 
