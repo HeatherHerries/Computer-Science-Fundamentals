@@ -1,0 +1,138 @@
+Exercises
+
+1. What is the main difference between a stack and a queue?
+
+The stack data structure arranges elements in a LIFO priority
+while a queue data structure arranges elements in FIFO
+priority.
+
+2. What are the similarities between stacks and queues?
+
+Both stacks and queues handle data flow. Both data structures 
+enable engineers to rank tasks, create an order of operations,
+and support system functions.
+
+3. Imagine you are an engineer tasked with implementing the 
+UNDO and REDO options in a word processor such as Microsoft 
+Word. Which data structure would you use for each option and 
+why?
+
+A stack data structure (LIFO) could be used to implement the
+UNDO option as it can replace the last action. While a queue
+data structure (FIFO) could be used to implement the REDO
+option and can add a change back.
+
+Programming Questions
+
+1. Given a string, reverse it using a stack. For example, the 
+string "Bloc!" should be converted to "!colB".
+
+Create function to reverse strings
+First push() each letter of the string into an array.
+Next push() each element of the array back into a string using
+a while loop.
+Return the reversed string.
+
+function reverse(string) {
+    var stack = [];
+    for (var i = 0; i < string.length; i++) {
+        stack.push(string[i]);
+    }
+    var reverseString = "";
+    while (stack.length > 0) {
+        reverseString += stack.pop();
+    }
+    return reverseString;
+}
+console.log(reverse("Bloc!));
+
+2. Implement the pop method of a stack using one queue. Make 
+a FIFO data structure mirror the functionality of a LIFO data 
+structure. Since the internal list is not the same as defined 
+in the checkpoint, it may help to rewrite the pseudocode first.
+
+For this you'll create a `Queue` data structure, and build 
+a `.pop()` method inside that behaves the same as the 
+`.pop()` method of a `Stack`.  The key here is to keep in 
+mind that we can _*ONLY*_ remove the *first* item in a queue, 
+one-at-a-time.  Whereas, in a Stack the we return the last 
+item added, in a Queue we return the first item added.  So 
+what this question wants is for a `.pop()` method to be created 
+that will remove the last item in the queue, and return it.  
+We will need to do t////that while maintaining the structure 
+as a true `Queue`--meaning we can only take the first item, 
+and have to traverse the entire queue in order to reach that 
+last item we want to remove.
+
+FUNCTION reverseQueue
+SET queue
+REVERSE queue order with decrementing FOR LOOP
+REMOVE FIRST Element from array with pop() and RETURN it to queue
+RETURN queue
+END FUNCTION
+
+let array1 = [1, 2, 3, 4];
+function reverseQueue(array) {
+    let queue = [];
+    for (i = array.length; i >= 0; i--) {
+        queue = array.pop(i);
+        return queue;
+    }
+}
+
+console.log(reverseQueue(array1)); //prints 4
+console.log(array1); //prints [1, 2, 3]
+console.log(reverseQueue(array1)); //prints 3
+console.log(array1); // [1, 2]
+console.log(reverseQueue(array1)); //prints 2
+console.log(array1); //prints [1]
+console.log(reverseQueue(array1)); //prints 1
+
+
+To delete an item, take all of the elements in the queue one 
+at a time and put them at the end of the queue, except for the 
+last one which should be removed and returned.
+
+1. Implement the enqueue and dequeue methods defined in the 
+checkpoint inside your own Queue class.
+
+UNCTION enqueue(element)
+  APPEND element to the end of the list
+END FUNCTION
+
+FUNCTION dequeue
+  SET temp to the first element
+  REMOVE FIRST element of list from list
+  RETURN temp
+END FUNCTION
+
+class Queue{
+  constructor(){
+    this.items = [];
+  }
+    enqueue(element){
+    return this.items.push(element);
+    }
+    dequeue(){
+    if(this.isEmpty())
+      return "Empty";
+    return this.items.shift();
+    }
+    isEmpty(){
+      return this.items.length == 0;
+    }
+}
+
+var numbers = new Queue;
+
+numbers.dequeue();
+console.log(numbers.dequeue()); //prints "Empty"
+
+numbers.enqueue(2);
+numbers.enqueue(4);
+numbers.enqueue(6);
+numbers.enqueue(8);
+console.log(numbers.items); //prints [2, 4, 6, 8]
+
+numbers.dequeue();
+console.log(numbers.items); //prints [4, 6, 8]
