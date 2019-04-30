@@ -1,0 +1,297 @@
+Exercises
+
+1. What are some pros and cons of using linked lists instead 
+of arrays?
+
+Pros: Linked lists use less memory.  As linked lists grow 
+larger, they do not require as much memory space as arrays.  
+This is because each node is independent in memory, so the 
+operating system may use any available memory location to store 
+it.  Node memory independence allows linked lists to easily 
+grow to immense sizes. When arrays grow larger, they require 
+consecutive locations in memory. Adding elements to the middle 
+of a linked list does not require shifting many of the other 
+elements in the array.  If you want to insert an element in 
+the middle of an array, half of the elements will need to shift.
+
+Cons: One of the biggest cons to linked lists is searching for 
+elements.  Because there is no indexing in a linked lists, one 
+cannot simple search for an element's index.  Instead one has 
+to begin one's search in the head or first node.  Starting with 
+the head, elements must be accessed in order. Another con is 
+when you insert nodes you will need to make sure you properly 
+link a previous node to the inserted node and have the inserted 
+node link to the next node as to not leave any nodes orphaned.  
+Same when deleting a node.  You have to make sure the node that 
+links to the deleted node has its link updated to reference 
+the node that the deleted node linked to.
+
+2. Come up with a real world example of a linked list.
+
+A real world example of a linked list is the game of telephone.
+This is a common children's game where they stand in a line,
+and the first person comes up with a message whispers it to
+the next person and the message gets passed on down the line 
+from one person to the next until it reaches the end.
+
+Programming Questions
+
+The linked list push function should take a value, create a 
+node, and add it to the end of a list. Below is pseudocode 
+for a push function for a singly linked list. However, there 
+is something wrong with it. Submit both an explanation of the 
+bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node // this should be SET current.next to null
+END IF
+END FUNCTION
+
+`SET current.next to node` should be `SET current.next to null`.
+
+function LinkedList(){
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
+    this.next = null;
+  };
+
+  this.size = function(){
+    return length;
+  };
+
+  this.head = function(){
+    return head.element;
+  };
+
+  this.add = function(element){
+    var node = new Node(element);
+    if(head === null){
+      head = node;
+    } else {
+      var currentNode = head;
+      while(currentNode.next){
+        currentNode = currentNode.next;
+      }
+      currentNode.next = node;
+    }
+    length++;
+  };
+
+  this.log = function(){
+    var currentNode = head;
+    while (currentNode) {
+       console.log(currentNode.element);
+       currentNode = currentNode.next
+    }
+ };
+}
+
+var evenNumbers = new LinkedList();
+evenNumbers.add('two');
+evenNumbers.add('four');
+evenNumbers.add('six');
+evenNumbers.add('eight');
+console.log(evenNumbers.size()); //prints 4
+evenNumbers.log(); /* prints
+"two"
+"four"
+"six"
+"eight"*/
+
+2. Given an unsorted singly linked list, remove all duplicates 
+from the linked list.
+
+
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+
+function LinkedList(){
+  var length = 0;
+  var head = null;
+
+  var Node = function(element){
+    this.element = element;
+    this.next = null;
+  };
+
+  this.size = function(){
+    return length;
+  };
+
+  this.head = function(){
+    return head.element;
+  };
+
+  this.add = function(element){
+    var node = new Node(element);
+    if(head === null){
+      head = node;
+    } else {
+      var currentNode = head;
+
+      while(currentNode.next){
+        currentNode = currentNode.next;
+      }
+
+      currentNode.next = node;
+    }
+
+    length++;
+  };
+
+   this.log = function(){
+     var currentNode = head;
+     while (currentNode) {
+        console.log(currentNode.element);
+        currentNode = currentNode.next
+     }
+  };
+
+  this.removeDuplicates = function () {
+    // Empty or a single element Linked List
+    if (!head || !head.next) {
+      console.log('No duplicates were found.');
+      return;
+    }
+    var p1;
+    var p2;
+    var nodes = {};
+
+    p1 = head;
+    p2 = p1.next;
+    nodes[p1.element] = true;
+
+    while (p2) {
+        var element = p2.element;
+        if (nodes[element]) {
+            p1.next = p2.next;
+            length--
+        } else {
+            nodes[element] = true;
+            p1 = p2;
+        }
+        p2 = p2.next;
+    }
+}
+}
+
+
+var letters = new LinkedList();
+letters.add('a');
+letters.add('c');
+letters.add('d');
+letters.add('d');
+letters.add('a');
+
+letters.log(); /* "a"
+"c"
+"d"
+"d"
+"a"*/
+
+console.log(letters.size()); //prints 5
+letters.removeDuplicates()
+
+letters.log(); /* prints /* "a"
+"c"
+"d"*/
+console.log(letters.size()); //prints 3
+
+3. Given an unsorted singly linked list, reverse it.
+
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+var Node = function(element){
+   this.element = element;
+   this.next = null;
+ };
+
+function LinkedList(){
+ var length = 0;
+ var head = null;
+
+ this.add = function(element){
+   var node = new Node(element);
+   if(head === null){
+     head = node;
+   } else {
+     var currentNode = head;
+
+     while(currentNode.next){
+       currentNode = currentNode.next;
+     }
+
+     currentNode.next = node;
+   }
+
+   length++;
+ };
+
+  this.log = function(){
+    var currentNode = head;
+    while (currentNode) {
+       console.log(currentNode.element);
+       currentNode = currentNode.next
+    }
+ };
+
+
+ this.reverse = function() {
+ let currentNode = head,
+     previous = null,
+     tmp;
+
+ while (currentNode) {
+
+   tmp = currentNode.next;
+
+
+   currentNode.next = previous;
+
+
+   previous = currentNode;
+   currentNode = tmp;
+
+ }
+ head = previous;
+}
+}
+
+
+
+var letters = new LinkedList();
+
+letters.add('a');
+letters.add('b');
+letters.add('c');
+letters.add('d');
+
+letters.log(); /* prints
+"a"
+"b"
+"c"
+"d" */
+
+letters.reverse();
+
+letters.log() /* prints
+"d"
+"c"
+"b"
+"a"
+*/
