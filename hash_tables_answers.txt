@@ -1,0 +1,300 @@
+Exercises
+
+1. What is a hash table?
+
+A hash table is a type of data structure that stores each value 
+by linking it to a key. This forms a key-value pair.  Each key 
+must be unique in a hash table so that a value can be retrieved 
+by looking up its distinct key.  Hash tables store the 
+key-value pairs by placing them at a particular location in an 
+array maintained internally in the hash table. To get the value 
+for a key, you search for the key to have the corresponding 
+value returned.
+
+2. What is hashing?
+
+The keys of a hash table can be of any data type.  Since arrays 
+can only be indexed by integers, there needs to be a process 
+to convert data types to integers.  Hashing is what hash tables 
+use to complete this conversion.  Hashing is the conversion 
+from a key of any type to a numerical index.  A hashing 
+function is used to convert the key to a specific, fixed-length 
+number, which is called a hash code.  Once a hash table has a 
+hash code it can use as a key, it assigns the key-value pair 
+in its internal array.
+
+3. How does a hash table store data?
+
+The steps used for a hash table to store data are:
+  1. Take the key.
+  2. Convert the key to a hash code using a hashing function.
+  3. Modify the hash code to get an array index.
+  4. Store the value in the array index.
+
+4. How are hash tables and objects different?
+
+If your data is a list of values with no need for an identifier,
+an array should be used. If your data is a static number of 
+distinct values of different types, then an object is the 
+optimal choice. A hash table should be used when one's data 
+contains a variable number of consistently formatted values, 
+each with an identifier.
+
+5. Determine whether you would use a hash table or an object to 
+store each of the following pieces of data:
+ - A list of pets and their unique names.
+   Hash Table 
+ - The name, age, and the birthday of your best friend.
+   Object
+ - The name and location of every company in a given city.
+   Hash Table
+ - All of the books checked out from a library by a particular 
+ individual.
+   Hash Table
+ - The primary and secondary phone numbers for a contact.
+   Object
+
+
+ Programming Questions
+
+1. Create a hash table that allows a sales associate to enter 
+a customer's name, address, and phone number into the system 
+and look up customers using their phone numbers.
+
+var hash = (key, max) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i)
+  }
+  return hashCode % max;
+};
+
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 20;
+
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(customer) {
+    let key = customer.phoneNumber;
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = customer;
+    } else {
+      while (storage[index] !== undefined){
+        index++;
+      }
+      storage[index] = customer;
+    };
+  };
+
+this.search = function(phoneNumber) {
+    let index = hash(phoneNumber, storageLimit);
+  return storage[index];
+  };
+
+};
+
+
+let JohnSmith = {
+  name: "John Smith",
+  address: "123 Fake St.",
+  phoneNumber: '123-123-1234'
+};
+
+
+let DeeMagee = {
+  name: "Dee Magee",
+  address: "222 North Ave.",
+  phoneNumber: '222-222-2222'
+};
+
+
+let JoeyJoJo = {
+  name: "Joey JoJo Junior Shabado",
+  address: "742 Evergreen Terrace",
+  phoneNumber: '888-888-8323'
+};
+
+
+let directory = new HashTable();
+directory.add(JohnSmith);
+directory.add(DeeMagee);
+directory.add(JoeyJoJo);
+
+
+console.log(hash('888-888-8323', 20)); //prints 14
+console.log(hash('222-222-2222', 20)); //prints 10
+console.log(hash('123-123-1234', 20)); //prints 12
+directory.print();
+console.log(directory.search('888-888-8323')); /* prints
+[object Object] {
+  address: "742 Evergreen Terrace",
+  name: "Joey JoJo Junior Shabado",
+  phoneNumber: "888-888-8323"
+}  */
+
+2. Create a hash table that allows a store owner to track 
+their store's inventory and quantity.
+
+var hash = (key, max) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i)
+  }
+  return hashCode % max;
+};
+
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 20;
+
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(item) {
+    let key = item.name;
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = item;
+    } else {
+      while (storage[index] !== undefined){
+        index++;
+      }
+      storage[index] = item;
+    };
+  };
+
+this.search = function(itemName) {
+    let index = hash(itemName, storageLimit);
+  return storage[index];
+  };
+
+};
+
+
+let doughnuts = {
+  name: 'doughnuts',
+  quantity: 135
+}
+
+let muffins = {
+  name: 'muffins',
+  quantity: 62
+}
+
+let juice = {
+  name: 'juice',
+  quantity: 45
+}
+
+let inventory = new HashTable();
+inventory.add(doughnuts);
+inventory.add(muffins);
+inventory.add(juice);
+
+
+console.log(hash('doughnuts', 20)); //prints 13
+console.log(hash('muffins', 20)); //prints 0
+console.log(hash('juice', 20)); //prints 8
+inventory.print();
+console.log(inventory.search('doughnuts')); /* prints
+[object Object] {
+  name: "doughnuts",
+  quantity: 135
+}*/
+
+3. Create a hash table that allows digital copies of newspapers 
+to be entered and searched by publisher and publication date.
+
+var hash = (key, max) => {
+
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i)
+  }
+  return hashCode % max;
+};
+
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 20;
+
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(news) {
+    let key = news.publisher + news.date;
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = news;
+    } else {
+      while (storage[index] !== undefined){
+        index++;
+      }
+      storage[index] = news;
+    };
+  };
+
+this.search = function(news) {
+    let key = news.publisher + news.date
+    let index = hash(key, storageLimit);
+  return storage[index];
+  };
+
+};
+
+
+let wsj042119 = {
+  publisher: 'Wall Street Journal',
+  date: '04/21/2019'
+}
+
+let nytimes041419 = {
+  publisher: 'New York Times',
+  date: '04/14/2019'
+}
+
+
+let nytimes040719 = {
+  publisher: 'New York Times',
+  date: '04/07/2019'
+}
+
+let newspapers = new HashTable();
+newspapers.add({publisher:'Wall Street Journal', date: '04/21/2019' });
+newspapers.add({publisher: 'New York Times', date: '04/14/2019'});
+newspapers.add({publisher: 'New York Times', date: '04/07/2019'});
+newspapers.add({publisher: 'New York Times', date: '04/21/2019'});
+
+newspapers.print(); /* prints
+
+[undefined, undefined, undefined, [object Object] {
+  date: "04/21/2019",
+  publisher: "Wall Street Journal"
+}, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, [object Object] {
+  date: "04/21/2019",
+  publisher: "New York Times"
+}, undefined, [object Object] {
+  date: "04/14/2019",
+  publisher: "New York Times"
+}, undefined, [object Object] {
+  date: "04/07/2019",
+  publisher: "New York Times"
+}]    */
+
+console.log(newspapers.search({publisher: 'New York Times', date: '04/14/2019'})); /* prints
+[object Object] {
+  date: "04/14/2019",
+  publisher: "New York Times"
+}*/
