@@ -1,0 +1,91 @@
+Exercises
+
+1. Using proper pseudo-code, describe the following primitive 
+algorithms:
+
+- Making coffee
+
+SET Make coffee
+GET keurig k-cup and place in k-cup holder and close holder
+DETERMINE if there is water needed in water container
+    IF water is needed THEN
+        Add water
+    ELSE
+        Add no water
+    ENDIF
+GET coffee mug and place under drip spout
+INIT press brew
+
+- Washing dishes
+
+INIT Wash dishes
+WHILE there are unclean dishes
+    Scrub and and rinse food particles off dish
+    IF item is dishwasher safe
+        Place item in dishwasher
+    ELSE
+        Wash dish by hand and place in drying rack
+    ENDIF
+ENDWHILE
+INIT Add soap
+INIT Turn dishwasher on
+DETERMINE if counters need to be wiped down
+    IF counters are unclean
+        Wipe counters with washcloth to clean
+    ELSE
+        Don't wipe counters
+    ENDIF
+
+- Brushing teeth
+
+SET Brush teeth
+INIT put toothpaste on toothbrush
+INIT toothbrush in mouth and brush each tooth thoroughly
+    IF teeth are not clean 
+        continue to brush
+    ELSE 
+        stop Brushing
+INIT spit toothpaste foam out of mouth
+INIT wipe mouth off
+
+2. As with the knot algorithm, there may be more than one way 
+to solve the problem. It is essential to try to pick the best 
+algorithm for a situation. Name three companies who created 
+an algorithm that made them successful, e.g., Google's search 
+algorithm. It doesn't need to be a tech example (such as a 
+recipe or manufacturing a product). Google's algorithm 
+produces more relevant results than other search engines; what 
+about each of your cases make them stand out?
+
+Facebook: Facebook social networking algorithms have made them 
+extremely popular. The way people are able to connect with 
+others and customize what they see has made Facebook a favorite 
+among many people.
+
+Youtube: Youtube's video making algorithms have made them very
+popular and have given us the opportunity to share things
+with others as we do them. 
+
+Pinterest: Pinterest's interest sharing algorithms have made
+it very easy to share our interests with friends and others. 
+What a great way to gain inspiration.
+
+3. Hypothesize about what constitutes an efficient algorithm 
+versus an inefficient algorithm.
+
+An efficient algorithm is an algorithm that executes its 
+purpose in the fastest way possible. Algorithm efficiency is 
+measured by the average execution time necessary for the 
+algorithm to complete the complete work on a set of data. An 
+example is I can get to my neighbor's house two ways. First, I 
+can get to their house by walking directly from my house to 
+their house.  Second, I can go the other direction, walk all 
+the way around the block, and then arrive at their house. Both 
+ways will get me to their house, but the first way is much 
+more efficient. It is better to use the most efficient 
+algorithm because as a project grows, it becomes easier to 
+scale when you are using the most efficient algorithms.  If 
+you are only dealing with 100 data points, it might not be a 
+big deal to have a less efficient algorithm, but if you are 
+dealing with 1,000 or 100,000 or 1,000,000 data points the 
+inefficiency will grow exponentially causing more problems.
