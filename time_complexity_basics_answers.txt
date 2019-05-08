@@ -1,0 +1,91 @@
+Exercises
+
+1. What is time complexity and what is its relation to 
+algorithms?
+
+Time complexity is a function that estimates the time it takes 
+for a program to execute. It is the metric used to describe 
+the efficiency of an algorithm.  To determine time complexity, 
+one calculates how quickly the time to run the program is 
+relative to the input that is fed into the program.
+
+2. What is runtime?
+
+Runtime is the physical time duration of an algorithm.  It is 
+synonymous with time complexity.
+
+3. How is the runtime of an algorithm calculated?
+
+Runtime is calculates as follows.  First, add up how many 
+instructions the algorithm will execute as a function of the 
+size of its input.  Then simplify the expression to the largest 
+term and drop and constants.
+
+4. Name the six types of algorithm growth rates we saw in this 
+checkpoint and list them in order of most efficient to least 
+efficient. Now Google another algorithmic growth rate not 
+covered and place it in the correct spot in your list.
+
+- Constant Growth Rate ( 0(1) )
+- Logarithmic Growth Rate ( 0(log n) )
+- Linear Growth Rate ( 0(n) )
+- Log-Linear Growth Rate ( 0(n log n) )
+- Quadric Growth Rate ( 0(n^2) )
+- Polynomial Growth Rate ( 0(n^c) )
+- Exponential Growth Rate ( 0(2^n) )
+
+5. Choose one of the algorithmic growth rates from the last 
+question and make a comparison to a real-life situation.
+
+Exponential Growth functions are often used to model population
+growth. A real-world example is if you had a species of rabbits 
+whose population grows at 200% each year.
+
+6. Determine the time complexity of the following snippet of 
+code. It is commonly known as linear search.
+
+FUNCTION linearSearch(array, target)
+ FOR each number in the array (n)
+   IF number = target THEN (1)
+     RETURN true (1)
+   END IF
+ END FOR
+ RETURN false
+END FUNCTION
+
+n + 1 + 1 = 0(n)
+
+7. Determine the time complexity of the following snippet of
+code.
+
+FUNCTION foo(array)
+ FOR each number in the array (n)
+   FOR each number in the array (n)
+     print "Hello" (1)
+   END FOR
+ END FOR
+END FUNCTION
+
+n * n + 1 = n^2 + 1 = O(n^2)
+
+8. Determine the time complexity of the following snippet of 
+code. It is commonly known as the Fibonacci sequence.
+
+FUNCTION fibonacci(number)
+ IF number < 1 THEN
+   ERROR
+ ELSE IF number = 1 or 2 THEN
+   RETURN 1
+ ELSE
+   CALL fibonacci WITH number - 2 RETURNING twoBack
+   CALL fibonacci WITH number - 1 RETURNING oneBack
+   RETURN twoBack + oneBack
+ END IF
+END FUNCTION
+
+0(2^n)
+
+9. Out of the code snippets you just saw, which is the most 
+time efficient?
+
+The Linear Growth Rate (6)
