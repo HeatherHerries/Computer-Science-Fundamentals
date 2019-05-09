@@ -1,0 +1,147 @@
+Exercises
+
+Short Answer
+
+1. What is a real-life scenario that uses linear search?
+
+I want to see if I have any 5 dollar bills in my purse. A
+linear search would be a good choice since i don't typically 
+keep my cash in any type of order. I can iterate through each
+bill starting at the beginning until I either reach a 5 
+dollar bill or reach the end of the cash. 
+
+2. What is a real-life scenario that uses binary search?
+
+I have an a list of my clients sorted alphabetically by last 
+name and I want to search for Stacey Dietz to see when her next
+appointment is. Since this is a sorted list doing a binary
+search would be the most efficient way.
+
+3. Given the alphabetically sorted collection in this 
+checkpoint, how many iterations would it take to find the value 
+G using linear search?
+
+7 iterations
+
+4. Given the alphabetically sorted collection in this 
+checkpoint, how many iterations would it take to find the value 
+G using binary search?
+
+3 iterations
+
+5. Given an unsorted collection of a million items, which 
+algorithm would you choose between linear search and binary 
+search? Explain your reasoning.
+
+I would choose a linear search due to the fact that the list is
+unsorted.
+
+6. Given a sorted collection of a million items, which 
+algorithm would you choose between linear search and binary 
+search? Explain your reasoning.
+
+I would choose a binary search due to the fact that it is an
+extensive list and that it is sorted. This would be the most
+efficient choice.
+
+Programming Assignment
+
+1. You and a friend have set a wager to see who can find the 
+word "Albatross" in the dictionary the fastest. Write a program 
+to allow you to win the bet.
+
+FUNCTION binarySearch(dictionary, word)
+ #1
+ Set lowerCase to a new variable with all of dictionary's strings lowercased
+  FUNCTION dictionary.map
+  return dictionary.toLowerCase()
+ SET first to FIRST INDEX of dictionary // 0
+ SET end to LAST INDEX of dictionary // dictionary.length - 1
+
+ #2
+ WHILE first <= end
+   #3
+   SET mid to (first + end) / 2      // Math.floor((0 + dictionary.length - 1) / 2)
+   IF lowerCase[mid] > word THEN  //
+     #4
+     SET end to mid - 1
+   ELSE IF dictionary[mid] < word
+     #5
+     SET first to mid + 1
+   ELSE
+     #6
+     RETURN mid
+   END IF
+ END WHILE
+
+ #7
+ RETURN NOT FOUND
+
+
+ function binarySearch(dictionary, word){
+   var lowerCase = dictionary.map(function(dictionary){
+    return dictionary.toLowerCase();
+   });
+
+   let first = 0;
+   let end = dictionary.length - 1;
+
+   while (first <= end ){
+     let mid = Math.floor((first + end) / 2)
+     console.log(first + ' ' + mid + ' ' + end);
+     if (lowerCase[mid] > word.toLowerCase()){
+       end = mid - 1;
+     } else if (lowerCase[mid] < word.toLowerCase()){
+       first = mid +1;
+     } else {
+       return mid
+     }
+   }
+   return "not found";
+ }
+
+ console.log(binarySearch(dictionary1, 'Albatross'));
+
+ var dictionary1 = ['a', 'abamp', 'abase', 'abby', 'abgatha', 'abhor',
+                   'abhorrent', 'air', 'Albatross', 'bat', 'butter', 'cat', 'cauliflower',
+                   'dog', 'fish', 'fishing', 'fry', 'frying', 'gnat', 'hat', 'igloo',
+                    'jam', 'kite', 'kitten', 'lake', 'mat', 'nap', 'none', 'nothing',
+                    'orange', 'Prince', 'queen', 'rat', 'razor', 'snake', 'silly', 'slack',
+                    'take', 'try', 'umbrella', 'vision', 'wake', 'x-ray', 'yak', 'zebra'];
+
+
+ console.log(binarySearch(dictionary1, 'Albatross'));  // prints 8
+
+
+2. You work at a pet store, and a child has asked you to net 
+the only white-spotted goldfish from the fish tank. Write a 
+program that will help you net the right fish.
+
+/* FUNCTION Find White-spotted Goldfish
+   FOR each fish in the bowl
+     IF fish = target THEN
+       RETURN
+     END IF
+   END FOR
+
+   RETURN NOT FOUND  */
+
+function findWhiteSpot(bowl, target ){
+   var result = null, value;
+   for(var i = 0; i < bowl.length; i++) {
+     value = bowl[i];
+     if(value === target){
+       result = i;
+       break;
+     }
+   }
+   return result;
+ };
+
+ let fishbowl = ['goldfish', 'goldfish', 'goldfish', 'goldfish', 'goldfish',
+                'goldfish', 'goldfish', 'goldfish', 'goldfish', 'goldfish',
+                'goldfish', 'white-spotted goldfish', 'goldfish',
+               'goldfish', 'goldfish', 'goldfish', 'goldfish', 'goldfish',
+               'goldfish', 'goldfish', 'goldfish', 'goldfish', 'goldfish', ]
+
+console.log(findWhiteSpot(fishbowl, 'white-spotted goldfish')); //prints 11
