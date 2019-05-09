@@ -1,0 +1,179 @@
+Exercises
+
+1. Define and compare recursion and iteration.
+
+Recursion is a function that calls itself until the process is 
+complete.
+
+Iteration is traversing through each element or item in an 
+array or other data structure.
+
+Recursive solutions tend to run slower and are more subject to 
+system limitations than iterative solutions.  An advantage of 
+recursive solutions is that they are often easier to implement 
+than iterative solutions.  When an algorithm can be defined as 
+a combination of sub-results starting with known cases, then a 
+recursive solution makes the most sense because that is 
+precisely what it handles (e.g., factorial). And since loops 
+are great at running straight through a data set, algorithms 
+requiring a pass over a collection works well as an iterative 
+solution (e.g., finding the maximum).
+
+2. Name five algorithms that are commonly implemented by 
+recursion.
+
+- Factorial of a Number
+- Greatest Common Divisor
+- Fibonacci Numbers
+- Quicksort
+- Mergesort
+
+3. When should you use recursion, and when should you avoid 
+recursion? Give examples for each.
+
+When an algorithm can be defined as a combination of 
+sub-results starting with known cases, then a recursive 
+solution makes the most sense because that is precisely what
+it handles.  Factorials are a great example.
+
+However, sometimes you have to look closer at the costs of 
+each implementation. In the case of fibonacci, the recursive 
+implementation seems more straightforward, but the tendency to 
+repeat calculations introduces a performance concern that 
+outweighs the cost of the slightly more complex iterative 
+implementation.  An example here is a recursive fibonacci 
+algorithm.  If you are trying to call a fibonacci function 
+greater than 50 the run time becomes unmanageable.
+
+4. Compare the recursive and iterative solutions to the three 
+algorithms from the checkpoint (factorial, maximum, and 
+fibonacci). What is similar, and what is different?
+
+Factorials: Both solutions solve the problem with relatively 
+few lines of code.  The recursive solution is simpler to write 
+and fits the logic of the problem more directly.
+
+  Recursive:
+      function factorial(num){
+        if (num < 0){
+          return "error";
+        }  else if (num === 0 || num === 1){
+          return 1;
+        } else {
+          return (num * factorial(num - 1));
+        }
+      }
+
+  Iterative:
+      function factorialize(num) {
+        if (num === 0 || num === 1)
+          return 1;
+        for (var i = num - 1; i >= 1; i--) {
+          num *= i;
+        }
+        return num;
+      }
+
+Maximum: The iterative version is much cleaner than the 
+recursive version. In the iterative form, we initialize 
+currentMaximum with the first number. Then, we loop through all 
+of the other numbers and compare them to currentMaximum. As we 
+find numbers larger than currentMaximum, we update 
+currentMaximum to that number.
+
+  Recursive:
+      var a = [2,3,5,10,23,44,78,];
+
+      function max(array)
+      {
+        var nums = array.slice();
+      if (nums.length == 1) { return nums[0]; }
+        if (nums[0] < nums[1]) { nums.splice(0,1); }
+        else { nums.splice(1,1); }
+        return max(nums);
+      }
+      
+  Iterative:
+      function myMax(array){
+        var m = -Infinity;
+        for (i = 0; i != array.length; ++i) {
+          if (array[i] > m) {
+            m = array[i];
+          }
+        }
+        return m;
+      }
+
+Fibonacci: The recursive solution works okay for smaller 
+numbers, but because the time complexity is O(2^n), it should 
+be avoided for larger numbers (above 40).  The iterative 
+solution is much better suited to handle this type of problem 
+especialy with larger numbers given its time complexity is O(n).
+
+    Recursive:
+        function fib(num){
+          if (num === 0){
+          return 0;
+          }
+          if (num === 1){
+          return 1;
+          }
+
+          return fib(num -2) + fib(num - 1);
+          }
+
+    Iterative:
+
+      function fibonacci(number) {
+        var previousFirst = 0, previousSecond = 1, next = 1;
+          for(var i = 2; i <= number; i++) {
+              next = previousFirst + previousSecond;
+              previousFirst = previousSecond;
+              previousSecond = next;
+          }
+          return next;
+        };
+
+
+5. Given a multi-dimensional collection (such as an array) 
+where the number of dimensions is unknown, write a recursive 
+algorithm to count the number of items in the entire collection.
+
+function arrayLength(array) {
+    if (!("0" in array)) {
+        return 0;
+    }
+    return arrayLength(array.slice(0, -1)) + 1; 
+}
+
+
+6. A palindrome is a word or phrase whose spelling is the same 
+either direction (e.g., racecar). Write a recursive algorithm 
+to determine if a given word or phrase is a palindrome.
+
+var isPalindrome = function(string) {
+    var stringLength = string.length;
+    if (stringLength === 0 || stringLength === 1) {
+        return true;
+    }
+
+    if (string[0] === string[stringLength - 1]) {
+        return isPalindrome( string.slice(1, stringLength - 1) );
+    }
+
+    return false;
+};
+
+7. Google Easter Egg: Google the term "recursion". Google will 
+prompt you with "Did you mean: recursion". Explain why this 
+behavior exhibits properties of recursion.
+
+When searching for the term "recursion", Google prompts you 
+with "Did you mean: recursion".  This exhibits properties of 
+recursion because one has just searched for the term recursion, 
+and now it is asking for you to run the exact same search. 
+Normally, Google only prompts you with the "Did you mean: ..." 
+if you misspelled a word.  So you (at least I did) check your 
+spelling. If you click the "Did you mean: recursion" it will 
+run the exact same search and the "Did you mean: recursion" 
+link will still appear.
