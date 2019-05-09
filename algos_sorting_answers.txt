@@ -1,0 +1,90 @@
+Exercises
+
+1. Implement a solution for bubble sort.
+
+var array1 = [9, 2, 5, 6, 4, 3, 7, 10, 1, 8];
+var array2 = [4, 1, 6, 9, 3, 12, 34, 53, 14, 64, 33, 23, 41, 8]
+
+function bubbleSort(array) {
+  function swap(array, i, j) {
+  var temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
+}
+  var swapped;
+  do {
+    swapped = false;
+    for(var i = 0; i < array.length; i++) {
+      if(array[i] && array[i + 1] && array[i] > array[i + 1]) {
+        swap(array, i, i + 1);
+        swapped = true;
+      }
+    }
+  } while(swapped);
+  return array;
+}
+
+2. Write pseudocode for quicksort.
+
+FUNCTION QUICKSORT with 3 INPUTS (array, left, right)
+  SET PIVOT
+  If elements are less than PIVOT
+    SET to LEFT
+  Else
+    SET to RIGHT
+  Call QUICKSORT on LEFT and RIGHT
+    RETURN array
+
+3. We talked about time complexity in a previous checkpoint, 
+and how to get an idea of the efficiency of an algorithm. After 
+looking at the pseudocode for the above sorting methods, 
+identify why merge sort and quick sort are much more efficient 
+than the others. Walking through each algorithm with a few 
+sample collections may help.
+
+The average time complexity of Merge Sort and Quick Sort is 
+O(n log(n)).  Both ways of sorting break down the collection so 
+it is being sorted into smaller parts to make searching go 
+faster. Merge sort breaks the collection into sub-collections 
+and sorts each sub-collection and then merges the 
+sub-collections back together.  Quick sort picks a pivot point 
+and compares each item to the pivot point move each item to 
+the left or right of the pivot point.  Once the first iteration 
+is done, these steps are repeated until the whole collection is 
+sorted.
+
+
+The average time complexity of Bubble Sort, Selection Sort, and 
+Insertion Sort is O(n^2). For each iteration in these sorting 
+methods you are iterating through the entire array for each 
+item in the array.  The runtime grows exponentially based on 
+the size of your input.
+
+4. All of the sorts addressed in this checkpoint are known as 
+comparison sorts. Research bucket sort and explain how it works. 
+What is the ideal input for bucket sort?
+
+This algorithm creates buckets to put elements in them.  An 
+insertion sort algorithm is applied to each bucket.  The 
+elements in each buckets are exported and joined to get a 
+sorted array.
+
+
+For example if you numbers [43, 18, 24, 55, 34, 29, 16, 53, 41, 
+31]
+
+0
+1       18, 16            sorted to 16, 18
+2       24, 29            sorted to 24, 29
+3       34, 31            sorted to 31, 34
+4       43, 41            sorted to 41, 43
+5       55, 53            sorted to 53, 55
+
+Buckets then concatenated 16, 18, 24, 29, 31, 34, 41, 43, 53, 
+55
+
+
+Bucket sort is useful when input is equally distributed over a 
+range.  If the items in a range are too uneven then you have 
+too many items in some buckets and few or none in others which
+slows down the runtime.
